@@ -144,7 +144,8 @@ services:
     volumes:
       - ride_pgdata:/var/lib/postgresql/data
       - ./ride-service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports: []
+    ports:
+      - '5432:5432'
 
   kafka:
     image: bitnami/kafka:latest
