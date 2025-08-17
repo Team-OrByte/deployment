@@ -17,3 +17,11 @@ docker tag bike_service:latest thetharz/orbyte_bike_service:latest
 docker push thetharz/orbyte_bike_service:latest
 
 Make sure port 8080 is free and just run docker compose up
+
+/bike-api/ → bike_service
+/review-api/ → review_service
+/user-api/ → user_service
+/auth-api/ → auth_service
+/ride-api/ → ride_service
+/reward-api/ → reward_service
+/payment-api/ → payment_service
