@@ -1,0 +1,19 @@
+# db_host = "bike_service_db"
+# db_host= "localhost"
+# db_port = 5432
+# db_name = "bikes_db"
+# db_user = "bike_service_user"
+# db_pass = "1KiHEb8LC0VmvUe"
+# pub_key = "./public.crt";
+[ballerina.log]
+level = "DEBUG"
+format = "json"
+
+[bike_service.repository]
+# host = "localhost"
+host = "bike_service_db"
+port = 5432
+user = "bike_service_user"
+password = "1KiHEb8LC0VmvUe"
+database = "bikes_db"
+

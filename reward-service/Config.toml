@@ -1,0 +1,7 @@
+host="reward_service_mongodb"
+database="reward-db"
+MONGO_REWARD_COLLECTION="reward_types"
+MONGO_USER_REWARD_COLLECTION="user_reward"
+username="reward-service-db-user"
+password="dbinitPASSWORD001axi00"
+port=27017

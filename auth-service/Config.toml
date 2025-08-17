@@ -1,0 +1,7 @@
+db_host = "auth_service_db"
+db_port = 5432
+db_user = "auth_service_user"
+db_pass = "qwertyui"
+db_name = "auth_db"
+pvt_key = "private.key"
+pub_key = "public.crt"

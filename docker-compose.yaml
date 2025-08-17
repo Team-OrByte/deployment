@@ -1,0 +1,239 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: api-gateway
+    ports:
+      - '8080:80'
+    volumes:
+      - ../api-gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - bike_service
+      - review_service
+      - user_service
+      - auth_service
+      - ride_service
+      - reward_service
+      - payment_service
+
+  bike_service:
+    image: bike_service:latest
+    container_name: bike_service
+    depends_on:
+      - bike-service-db
+    volumes:
+      - ./bike-service/Config.toml:/app/Config.toml
+      - bike_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  bike-service-db:
+    image: postgres:15
+    container_name: bike_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bikes_db
+      POSTGRES_USER: bike_service_user
+      POSTGRES_PASSWORD: 1KiHEb8LC0VmvUe
+    volumes:
+      - bike_pgdata:/var/lib/postgresql/data
+      - ./bike-service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: []
+
+  review_service:
+    image: review_service:latest
+    container_name: review_service
+    depends_on:
+      - review-service-db
+    volumes:
+      - ./review_service/Config.toml:/app/Config.toml
+      - review_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  review-service-db:
+    image: postgres:15
+    container_name: review_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: review_db
+      POSTGRES_USER: review_service_user
+      POSTGRES_PASSWORD: 1KiHEb8LC0VmvUe
+    volumes:
+      - review_pgdata:/var/lib/postgresql/data
+      - ./review_service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: []
+
+  user_service:
+    image: user_service:latest
+    container_name: user_service
+    depends_on:
+      - user_service_db
+    volumes:
+      - ./user-service/Config.toml:/app/Config.toml
+      - user_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  user_service_db:
+    image: postgres:15
+    container_name: user_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: user_service_db
+      POSTGRES_USER: user_service_user
+      POSTGRES_PASSWORD: qwertyui
+    volumes:
+      - user_pgdata:/var/lib/postgresql/data
+      - ./user-service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: []
+
+  auth_service:
+    image: auth_service:latest
+    container_name: auth_service
+    depends_on:
+      - auth_service_db
+    volumes:
+      - ./auth-service/Config.toml:/app/Config.toml
+      - auth_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  auth_service_db:
+    image: postgres:15
+    container_name: auth_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: auth_service_user
+      POSTGRES_PASSWORD: qwertyui
+    volumes:
+      - auth_pgdata:/var/lib/postgresql/data
+      - ./auth-service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: []
+
+  ride_service:
+    image: tharindugee/orbyte_ride-service:v0.1.0
+    container_name: ride_service
+    depends_on:
+      - ride_service_db
+      - kafka
+    volumes:
+      - ./ride-service/Config.toml:/app/Config.toml
+      - ride_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  ride_service_db:
+    image: postgres:15
+    container_name: ride_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ride_service_db
+      POSTGRES_USER: ride_user
+      POSTGRES_PASSWORD: ride_pass
+    volumes:
+      - ride_pgdata:/var/lib/postgresql/data
+      - ./ride-service/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: []
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    restart: always
+    ports: []
+    volumes:
+      - kafka_data:/bitnami/kafka
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - ALLOW_PLAINTEXT_LISTENER=yes
+
+  reward_service:
+    image: reward_service:latest
+    container_name: reward_service
+    depends_on:
+      - reward_service_mongodb
+    volumes:
+      - ./reward-service/Config.toml:/app/Config.toml
+      - reward_logs:/app/logs
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+
+  reward_service_mongodb:
+    image: mongo:7.0
+    container_name: reward-service-mongodb
+    restart: unless-stopped
+    ports: []
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: reward-service-db-user
+      MONGO_INITDB_ROOT_PASSWORD: dbinitPASSWORD001axi00
+      MONGO_INITDB_DATABASE: reward-db
+    volumes:
+      - reward_mongodb_data:/data/db
+      - ./reward-service/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  payment_service:
+    image: payment_service:latest
+    container_name: payment-service
+    restart: unless-stopped
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+    depends_on:
+      - payment_service_mongodb
+    volumes:
+      - ./stripe-payment-service/Config.toml:/app/Config.toml
+      - payment_logs:/app/logs
+
+  payment_service_mongodb:
+    image: mongo:7.0
+    container_name: payment-service-mongodb
+    restart: unless-stopped
+    ports: []
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: payment-service-db-user
+      MONGO_INITDB_ROOT_PASSWORD: dbinitPASSWORD001axi00
+      MONGO_INITDB_DATABASE: payment-service-db
+    volumes:
+      - payment_mongodb_data:/data/db
+      - ./stripe-payment-service/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+volumes:
+  bike_pgdata:
+  review_pgdata:
+  bike_logs:
+  review_logs:
+  user_pgdata:
+  user_logs:
+  auth_pgdata:
+  auth_logs:
+  ride_pgdata:
+  ride_logs:
+  reward_logs:
+  payment_logs:
+  payment_mongodb_data:
+  reward_mongodb_data:
+  kafka_data:

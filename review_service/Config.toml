@@ -1,0 +1,7 @@
+[review_service.repository]
+host = "review-service-db"
+port = 5432
+user = "review_service_user"
+password = "1KiHEb8LC0VmvUe"
+database = "review_db"
+
