@@ -2,16 +2,11 @@
 PORT = 8081
 
 [ride_service.repository]
-# host = "localhost"
 host = "ride_service_db"
 port = 5432
 user = "ride_user"
 password = "ride_pass"
 database = "ride_service_db"
-
-[ride_service.user_service_client.userServiceClient]
-url = "http://user_service:5000"
-timeout = 2.0
 
 [ride_service.bike_service_client.bikeServiceClient]
 url = "http://bike_service:8090/bike-service"
@@ -21,14 +16,8 @@ timeout = 2.0
 url = "http://reward_service:8091/"
 timeout = 2.0
 
-[ride_service.user_service_client.userCapabilityCacheConfig]
-capacity = 1000
-evictionFactor = 0.25
-defaultMaxAge = 300.0
-cleanupInterval = 600.0
-
 [ride_service.event_handler]
-SERVER_URL = "kafka:9094"
+SERVER_URL = "http://kafka:9094"
 RIDE_RESERVE_TOPIC = "ride-reserve-topic"	
 RIDE_START_TOPIC = "ride-start-topic"
 RIDE_END_TOPIC = "ride-end-topic"

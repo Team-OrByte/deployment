@@ -121,7 +121,7 @@ services:
     ports: []
 
   ride_service:
-    image: tharindugee/orbyte_ride-service:v0.1.0
+    image: tharindugee/orbyte_ride-service:v0.1.1
     container_name: ride_service
     depends_on:
       - ride_service_db
@@ -150,7 +150,8 @@ services:
     image: bitnami/kafka:latest
     container_name: kafka
     restart: always
-    ports: []
+    ports:
+      - '9094:9094'
     volumes:
       - kafka_data:/bitnami/kafka
     environment:
