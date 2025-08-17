@@ -75,6 +75,7 @@ services:
     volumes:
       - ./user-service/Config.toml:/app/Config.toml
       - user_logs:/app/logs
+      - ./user-service/public.crt:/home/ballerina/public.crt
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -100,6 +101,8 @@ services:
     volumes:
       - ./auth-service/Config.toml:/app/Config.toml
       - auth_logs:/app/logs
+      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/private.key:/home/ballerina/private.key
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
