@@ -18,7 +18,7 @@ services:
       - payment_service
 
   bike_service:
-    image: bike_service:latest
+    image: thetharz/orbyte_bike_service:latest
     container_name: bike_service
     depends_on:
       - bike-service-db
@@ -43,7 +43,7 @@ services:
     ports: []
 
   review_service:
-    image: review_service:latest
+    image: thetharz/orbyte_review_service:latest
     container_name: review_service
     depends_on:
       - review-service-db
@@ -68,7 +68,7 @@ services:
     ports: []
 
   user_service:
-    image: user_service:latest
+    image: thetharz/orbyte_user_service:latest
     container_name: user_service
     depends_on:
       - user_service_db
@@ -93,7 +93,7 @@ services:
     ports: []
 
   auth_service:
-    image: auth_service:latest
+    image: thetharz/orbyte_auth_service:latest
     container_name: auth_service
     depends_on:
       - auth_service_db
@@ -165,7 +165,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
 
   reward_service:
-    image: reward_service:latest
+    image: thetharz/orbyte_reward_service:latest
     container_name: reward_service
     depends_on:
       - reward_service_mongodb
@@ -196,7 +196,7 @@ services:
       start_period: 30s
 
   payment_service:
-    image: payment_service:latest
+    image: thetharz/orbyte_payment_service:latest
     container_name: payment-service
     restart: unless-stopped
     ports: []

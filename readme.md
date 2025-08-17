@@ -15,3 +15,5 @@ docker push thetharz/orbyte_review_service:latest
 
 docker tag bike_service:latest thetharz/orbyte_bike_service:latest
 docker push thetharz/orbyte_bike_service:latest
+
+Make sure port 8080 is free and just run docker compose up
