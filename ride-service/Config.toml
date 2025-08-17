@@ -10,7 +10,7 @@ password = "ride_pass"
 database = "ride_service_db"
 
 [ride_service.user_service_client.userServiceClient]
-url = "hh"
+url = "http://user_service:5000"
 timeout = 2.0
 
 [ride_service.bike_service_client.bikeServiceClient]
