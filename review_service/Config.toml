@@ -1,3 +1,4 @@
+pub_key = "./public.crt"
 [review_service.repository]
 host = "review-service-db"
 port = 5432

@@ -19,6 +19,7 @@ services:
 
   bike_service:
     image: thetharz/orbyte_bike_service:latest
+    # image: bike_service:latest
     container_name: bike_service
     depends_on:
       - bike-service-db
@@ -123,7 +124,7 @@ services:
     ports: []
 
   ride_service:
-    image: tharindugee/orbyte_ride-service:v0.1.1
+    image: tharindugee/orbyte_ride-service:v0.1.3
     container_name: ride_service
     depends_on:
       - ride_service_db

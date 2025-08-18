@@ -1,3 +1,5 @@
+pub_key = "./public.crt"
+
 [ride_service]
 PORT = 8081
 
@@ -15,15 +17,3 @@ timeout = 2.0
 [ride_service.reward_service_client.rewardServiceClient]
 url = "http://reward_service:8091/"
 timeout = 2.0
-
-[ride_service.event_handler]
-SERVER_URL = "http://kafka:9094"
-RIDE_RESERVE_TOPIC = "ride-reserve-topic"	
-RIDE_START_TOPIC = "ride-start-topic"
-RIDE_END_TOPIC = "ride-end-topic"
-RIDE_CANCEL_TOPIC = "ride-cancel-topic"
-
-[ride_service.event_handler.producerConfiguration]
-clientId = "event-producer"
-acks = "all"
-retryCount = 3
