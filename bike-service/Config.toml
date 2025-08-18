@@ -4,7 +4,7 @@
 # db_name = "bikes_db"
 # db_user = "bike_service_user"
 # db_pass = "1KiHEb8LC0VmvUe"
-# pub_key = "./public.crt";
+pub_key = "./public.crt"
 [ballerina.log]
 level = "DEBUG"
 format = "json"
