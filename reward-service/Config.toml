@@ -5,3 +5,4 @@ database="reward-db"
 username="reward-service-db-user"
 password="dbinitPASSWORD001axi00"
 port=27017
+pub_key = "./public.crt"
