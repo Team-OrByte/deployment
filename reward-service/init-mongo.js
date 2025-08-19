@@ -1,4 +1,4 @@
-db = db.getSiblingDB('reward-service-db');
+db = db.getSiblingDB('reward-db');
 
 db.createUser({
   user: 'reward-service-db-user',
