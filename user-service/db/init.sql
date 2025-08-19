@@ -16,3 +16,33 @@ CREATE TABLE user_preferences (
     preferred_language VARCHAR(10) DEFAULT 'en',
     notifications_enabled BOOLEAN DEFAULT TRUE
 );
+
+-- Insert default admin user profile
+INSERT INTO users_profile (
+    user_id,
+    full_name,
+    email,
+    phone_number,
+    user_address,
+    created_at,
+    updated_at
+) VALUES (
+    'admin-001',
+    'System Administrator',
+    'admin@gmail.com',
+    '+1-555-0100',
+    'System Administrator Address',
+    CURRENT_TIMESTAMP,
+    CURRENT_TIMESTAMP
+) ON CONFLICT (email) DO NOTHING;
+
+-- Insert default admin user preferences
+INSERT INTO user_preferences (
+    user_id,
+    preferred_language,
+    notifications_enabled
+) VALUES (
+    'admin-001',
+    'en',
+    TRUE
+) ON CONFLICT (user_id) DO NOTHING;

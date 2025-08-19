@@ -15,3 +15,20 @@ CREATE TABLE IF NOT EXISTS auth_accounts (
 CREATE INDEX IF NOT EXISTS idx_auth_accounts_user_id ON auth_accounts (user_id);
 
 CREATE INDEX IF NOT EXISTS idx_auth_accounts_email ON auth_accounts (email);
+
+-- Insert default admin user
+-- Default password is 'admin123' (bcrypt hash)
+-- IMPORTANT: Change this password after first login!
+INSERT INTO auth_accounts (
+    user_id, 
+    email, 
+    password_hash, 
+    role, 
+    created_at
+) VALUES (
+    'admin-001',
+    'admin@gmail.com',
+    '$2a$12$f4sZqGzKqpVfKy6ZTiQnvnFB+03g+Q10BLnrvVaNMBJTy/PI0MpaSA==', -- Admin@1234
+    'admin',
+    CURRENT_TIMESTAMP
+) ON CONFLICT (email) DO NOTHING;
