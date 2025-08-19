@@ -15,5 +15,5 @@ url = "http://bike_service:8090/bike-service"
 timeout = 2.0
 
 [ride_service.reward_service_client.rewardServiceClient]
-url = "http://reward_service:8091/"
+url = "http://reward_service:9092/"
 timeout = 2.0
