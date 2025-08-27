@@ -1,0 +1,10 @@
+stripeSecretKey = "your_stripe_secret_key"
+successRedirectUrl="http://localhost:3000/success"
+cancelRedirectUrl="http://localhost:3000/cancel"
+
+host = "payment_service_mongodb"
+port = 27017
+username = "payment-service-db-user"
+password = "dbinitPASSWORD001axi00"
+database = "payment-service-db"
+collection = "payments"

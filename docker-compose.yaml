@@ -16,11 +16,10 @@ services:
       - ride_service
       - reward_service
       - payment_service
+      - notification_service
 
   bike_service:
-    # image: thetharz/orbyte_bike_service:latest
-    # image: bike_service:latest
-    image: bike-service-bike-service:latest
+    image: thetharz/orbyte_bike_service:latest
     container_name: bike_service
     depends_on:
       - bike-service-db
@@ -235,7 +234,32 @@ services:
       MONGO_INITDB_DATABASE: payment-service-db
     volumes:
       - payment_mongodb_data:/data/db
-      - ./stripe-payment-service/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./payment-service/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  notification_service_db:
+    image: mongo:7.0
+    container_name: notification_service_db
+    restart: unless-stopped
+    ports: []
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: notif_user
+      MONGO_INITDB_ROOT_PASSWORD: notif_pass
+      MONGO_INITDB_DATABASE: notification-management
+    volumes:
+      - notification_mongodb_data:/data/db
+
+  notification_service:
+    image: thetharz/orbyte_notification_service:latest
+    container_name: notification_service
+    restart: unless-stopped
+    ports: []
+    environment:
+      BAL_CONFIG_FILES: /app/Config.toml
+    depends_on:
+      - notification_service_db
+    volumes:
+      - ./notification-service/Config.toml:/app/Config.toml
+      - ./user-service/public.crt:/home/ballerina/public.crt
 
 volumes:
   bike_pgdata:
@@ -253,3 +277,4 @@ volumes:
   payment_mongodb_data:
   reward_mongodb_data:
   kafka_data:
+  notification_mongodb_data:

@@ -1,7 +1,0 @@
-host="payment_service_mongodb"
-port=27017
-username="payment-service-db-user"
-password="dbinitPASSWORD001axi00"
-database="payment-service-db"
-secretKey="sk_test_51RhVHnB2pNfN0PWkWSU6K7ujjZ0x911WCBE36kAZdhfhQqkgLkMFE3GE8MzbZYMxrt2UPCOa2eoZ0bCJc5phBgAJ00pvnUSpbq"
-# STRIPE_PUBLISHABLE_KEY="pk_test_51RhVHnB2pNfN0PWkz02nqUTxBG6zlSWlkvKF4xyjL5KZbMU5kokACasL6VDC2M47tGlPkSbSphyhN6HQQrbCJ3vc00EUBIhb4C"
