@@ -18,8 +18,9 @@ services:
       - payment_service
 
   bike_service:
-    image: thetharz/orbyte_bike_service:latest
+    # image: thetharz/orbyte_bike_service:latest
     # image: bike_service:latest
+    image: bike-service-bike-service:latest
     container_name: bike_service
     depends_on:
       - bike-service-db
@@ -45,7 +46,8 @@ services:
     ports: []
 
   review_service:
-    image: thetharz/orbyte_review_service:latest
+    # image: thetharz/orbyte_review_service:latest
+    image: review_service:latest
     container_name: review_service
     depends_on:
       - review-service-db
