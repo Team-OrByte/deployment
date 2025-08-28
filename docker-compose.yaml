@@ -45,8 +45,8 @@ services:
     ports: []
 
   review_service:
-    # image: thetharz/orbyte_review_service:latest
-    image: review_service:latest
+    image: thetharz/orbyte_review_service:latest
+    # image: review_service:latest
     container_name: review_service
     depends_on:
       - review-service-db
@@ -249,7 +249,7 @@ services:
       - notification_mongodb_data:/data/db
 
   notification_service:
-    image: thetharz/orbyte_notification_service:latest
+    image: tharindugee/orbyte_notification-service:v0.1.0
     container_name: notification_service
     restart: unless-stopped
     ports: []
