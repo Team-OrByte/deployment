@@ -8,3 +8,5 @@ username = "payment-service-db-user"
 password = "dbinitPASSWORD001axi00"
 database = "payment-service-db"
 collection = "payments"
+
+kafkaBootstrapServers = "kafka:9092"

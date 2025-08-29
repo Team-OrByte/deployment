@@ -101,6 +101,7 @@ services:
   auth_service:
     image: thetharz/orbyte_auth_service:latest
     container_name: auth_service
+    restart: always
     depends_on:
       - auth_service_db
     volumes:
