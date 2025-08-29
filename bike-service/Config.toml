@@ -5,6 +5,8 @@
 # db_user = "bike_service_user"
 # db_pass = "1KiHEb8LC0VmvUe"
 pub_key = "./public.crt"
+kafkaBootstrapServers = "kafka:9092"
+
 [ballerina.log]
 level = "DEBUG"
 format = "json"
