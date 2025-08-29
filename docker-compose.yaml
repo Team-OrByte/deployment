@@ -224,7 +224,7 @@ services:
       - payment_service_mongodb
       - kafka
     volumes:
-      - ./stripe-payment-service/Config.toml:/app/Config.toml
+      - ./payment-service/Config.toml:/app/Config.toml
       - payment_logs:/app/logs
       - ./user-service/public.crt:/home/ballerina/public.crt
 
