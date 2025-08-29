@@ -23,6 +23,7 @@ services:
     container_name: bike_service
     depends_on:
       - bike-service-db
+      - kafka
     volumes:
       - ./bike-service/Config.toml:/app/Config.toml
       - bike_logs:/app/logs
@@ -161,6 +162,8 @@ services:
     restart: always
     ports:
       - '9094:9094'
+      - '9092:9092'
+      - '9093:9093'
     volumes:
       - kafka_data:/bitnami/kafka
     environment:
@@ -213,11 +216,13 @@ services:
     image: thetharz/orbyte_payment_service:latest
     container_name: payment-service
     restart: unless-stopped
-    ports: []
+    ports:
+      - '9091:9091'
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
     depends_on:
       - payment_service_mongodb
+      - kafka
     volumes:
       - ./stripe-payment-service/Config.toml:/app/Config.toml
       - payment_logs:/app/logs
@@ -252,7 +257,9 @@ services:
     image: tharindugee/orbyte_notification-service:v0.1.0
     container_name: notification_service
     restart: unless-stopped
-    ports: []
+    ports:
+      - '8084:8084'
+      - '27760:27760'
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
     depends_on:
