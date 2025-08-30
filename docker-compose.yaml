@@ -27,7 +27,7 @@ services:
     volumes:
       - ./bike-service/Config.toml:/app/Config.toml
       - bike_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -54,7 +54,7 @@ services:
     volumes:
       - ./review_service/Config.toml:/app/Config.toml
       - review_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -80,7 +80,7 @@ services:
     volumes:
       - ./user-service/Config.toml:/app/Config.toml
       - user_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -107,8 +107,8 @@ services:
     volumes:
       - ./auth-service/Config.toml:/app/Config.toml
       - auth_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
-      - ./user-service/private.key:/home/ballerina/private.key
+      - ./user-service/public.crt:/app/public.crt
+      - ./user-service/private.key:/app/private.key
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -136,7 +136,7 @@ services:
     volumes:
       - ./ride-service/Config.toml:/app/Config.toml
       - ride_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+        - ./user-service/public.crt:/app/public.crt
     ports:
       - '27751:27751'
       - '27750:27750'
@@ -189,7 +189,7 @@ services:
     volumes:
       - ./reward-service/Config.toml:/app/Config.toml
       - reward_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
     ports: []
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
@@ -227,7 +227,7 @@ services:
     volumes:
       - ./payment-service/Config.toml:/app/Config.toml
       - payment_logs:/app/logs
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
 
   payment_service_mongodb:
     image: mongo:7.0
@@ -267,7 +267,7 @@ services:
       - notification_service_db
     volumes:
       - ./notification-service/Config.toml:/app/Config.toml
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
 
 volumes:
   bike_pgdata:
