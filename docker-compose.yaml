@@ -136,7 +136,7 @@ services:
     volumes:
       - ./ride-service/Config.toml:/app/Config.toml
       - ride_logs:/app/logs
-        - ./user-service/public.crt:/app/public.crt
+        - ./user-service/public.crt:/home/ballerina/public.crt
     ports:
       - '27751:27751'
       - '27750:27750'
@@ -267,7 +267,7 @@ services:
       - notification_service_db
     volumes:
       - ./notification-service/Config.toml:/app/Config.toml
-      - ./user-service/public.crt:/app/public.crt
+      - ./user-service/public.crt:/home/ballerina/public.crt
 
 volumes:
   bike_pgdata:
