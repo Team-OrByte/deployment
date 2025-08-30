@@ -29,7 +29,7 @@ defaultMaxAge = 300.0
 cleanupInterval = 600.0
 
 [ride_service.event_handler]
-SERVER_URL = "localhost:9094"
+SERVER_URL = "kafka:9092" 
 RIDE_NOTIF_EVENTS_TOPIC = "ride-events"
 PAYMENT_EVENTS_TOPIC = "payment-events"	
 
