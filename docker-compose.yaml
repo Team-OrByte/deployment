@@ -268,7 +268,7 @@ services:
       - notification_service_db
     volumes:
       - ./notification-service/Config.toml:/app/Config.toml
-      - ./user-service/public.crt:/home/ballerina/public.crt
+      - ./user-service/public.crt:/app/public.crt
 
 volumes:
   bike_pgdata:
