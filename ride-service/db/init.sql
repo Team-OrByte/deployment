@@ -6,7 +6,7 @@ CREATE TABLE "ride" (
 	"bike_id" VARCHAR(191) NOT NULL,
 	"start_time" TIMESTAMP,
 	"end_time" TIMESTAMP,
-	"status" VARCHAR(11) CHECK ("status" IN ('RESERVED', 'IN_PROGRESS', 'CANCELLED', 'ENDED')) NOT NULL,
+	"status" VARCHAR(11) CHECK ("status" IN ('RESERVED', 'IN_PROGRESS', 'CANCELLED', 'ENDED','PENDING','FAILED')) NOT NULL,
 	"distance" FLOAT,
 	"duration" INT,
 	"start_location" VARCHAR(191) NOT NULL,
