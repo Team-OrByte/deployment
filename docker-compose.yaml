@@ -140,6 +140,7 @@ services:
     ports:
       - '27751:27751'
       - '27750:27750'
+      - '27770:27770'
     environment:
       BAL_CONFIG_FILES: /app/Config.toml
 
