@@ -35,7 +35,7 @@ services:
   bike-service-db:
     image: postgres:15
     container_name: bike_service_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: bikes_db
       POSTGRES_USER: bike_service_user
@@ -62,7 +62,7 @@ services:
   review-service-db:
     image: postgres:15
     container_name: review_service_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: review_db
       POSTGRES_USER: review_service_user
@@ -88,7 +88,7 @@ services:
   user_service_db:
     image: postgres:15
     container_name: user_service_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: user_service_db
       POSTGRES_USER: user_service_user
@@ -116,7 +116,7 @@ services:
   auth_service_db:
     image: postgres:15
     container_name: auth_service_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: auth_db
       POSTGRES_USER: auth_service_user
@@ -147,7 +147,7 @@ services:
   ride_service_db:
     image: postgres:15
     container_name: ride_service_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: ride_service_db
       POSTGRES_USER: ride_user
@@ -198,7 +198,7 @@ services:
   reward_service_mongodb:
     image: mongo:7.0
     container_name: reward-service-mongodb
-    restart: unless-stopped
+    restart: always
     ports: []
     environment:
       MONGO_INITDB_ROOT_USERNAME: reward-service-db-user
@@ -217,7 +217,7 @@ services:
   payment_service:
     image: thetharz/orbyte_payment_service:latest
     container_name: payment-service
-    restart: unless-stopped
+    restart: always
     ports:
       - '9091:9091'
     environment:
@@ -233,7 +233,7 @@ services:
   payment_service_mongodb:
     image: mongo:7.0
     container_name: payment-service-mongodb
-    restart: unless-stopped
+    restart: always
     ports: []
     environment:
       MONGO_INITDB_ROOT_USERNAME: payment-service-db-user
@@ -246,7 +246,7 @@ services:
   notification_service_db:
     image: mongo:7.0
     container_name: notification_service_db
-    restart: unless-stopped
+    restart: always
     ports: []
     environment:
       MONGO_INITDB_ROOT_USERNAME: notif_user
@@ -258,7 +258,7 @@ services:
   notification_service:
     image: tharindugee/orbyte_notification-service:v0.1.0
     container_name: notification_service
-    restart: unless-stopped
+    restart: always
     ports:
       - '8084:8084'
       - '27760:27760'
@@ -269,6 +269,18 @@ services:
     volumes:
       - ./notification-service/Config.toml:/app/Config.toml
       - ./user-service/public.crt:/app/public.crt
+
+  e-bike-rental-client:
+    image: thetharz/orbyte_rental_client:latest
+    container_name: e-bike-rental-client
+    ports:
+      - '3000:80'
+    environment:
+      - NODE_ENV=production
+      - ./client/.env
+    depends_on:
+      - nginx
+    restart: always
 
 volumes:
   bike_pgdata:
