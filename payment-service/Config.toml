@@ -1,6 +1,6 @@
 stripeSecretKey = "your_stripe_secret_key"
-successRedirectUrl="http://localhost:3000/success"
-cancelRedirectUrl="http://localhost:3000/cancel"
+successRedirectUrl="http://localhost:3000/payment-success"
+cancelRedirectUrl="http://localhost:3000/payment-failed"
 
 host = "payment_service_mongodb"
 port = 27017
