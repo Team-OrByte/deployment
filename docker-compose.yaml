@@ -274,7 +274,7 @@ services:
     image: thetharz/orbyte_rental_client:latest
     container_name: e-bike-rental-client
     ports:
-      - '3000:80'
+      - '3000:3000'
     environment:
       - NODE_ENV=production
       - ./client/.env
