@@ -270,22 +270,6 @@ services:
       - ./notification-service/Config.toml:/app/Config.toml
       - ./user-service/public.crt:/app/public.crt
 
-  e-bike-rental-client:
-    image: thetharz/orbyte_rental_client:latest
-    container_name: e-bike-rental-client
-    ports:
-      - '5173:5173'
-    environment:
-      - NODE_ENV=production
-      - VITE_RIDE_WS_URL=ws://localhost:27770/rides
-      - VITE_PAYMENT_WS_URL=ws://localhost:9091/payment-ws
-      - VITE_API_BASE_URL=http://localhost:8080
-      - VITE_CLOUDINARY_CLOUD_NAME=ascd
-      - VITE_CLOUDINARY_UPLOAD_PRESET=ebike-image-store
-    depends_on:
-      - nginx
-    restart: always
-
 volumes:
   bike_pgdata:
   review_pgdata:
